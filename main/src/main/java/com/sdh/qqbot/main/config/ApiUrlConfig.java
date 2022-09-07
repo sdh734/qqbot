@@ -1,4 +1,4 @@
-package sdh.qqbot.config;
+package com.sdh.qqbot.main.config;
 
 /**
  * 保存需要的api链接。

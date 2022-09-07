@@ -1,4 +1,4 @@
-package sdh.qqbot.config;
+package com.sdh.qqbot.main.config;
 
 /**
  * 用于保存各种API_TOKEN的配置文件
