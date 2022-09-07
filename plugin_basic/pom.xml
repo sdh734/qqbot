@@ -9,12 +9,65 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>plugin_basic</artifactId>
+    <artifactId>plugin-basic</artifactId>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+            <version>${spring-boot.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.gitee.starblues</groupId>
+            <artifactId>spring-brick-bootstrap</artifactId>
+            <version>${spring-brick.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sdh</groupId>
+            <artifactId>main</artifactId>
+            <version>1.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.24</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.gitee.starblues</groupId>
+                <artifactId>spring-brick-maven-packager</artifactId>
+                <version>${spring-brick.version}</version>
+                <configuration>
+                    <mode>dev</mode>
+                    <pluginInfo>
+                        <id>plugin-basic</id>
+                        <bootstrapClass>com.sdh.qqbot.plugin.basic.BasicPluginApplication</bootstrapClass>
+                        <version>1.0.0</version>
+                        <provider>SDH</provider>
+                        <description>测试插件1</description>
+                    </pluginInfo>
+                    <prodConfig>
+                        <packageType>jar</packageType>
+                        <outputDirectory>F://Java_Workspace//qqbot//plugins</outputDirectory>
+                    </prodConfig>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>

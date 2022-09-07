@@ -1,10 +1,10 @@
-package sdh.qqbot.utils.push;
+package com.sdh.qqbot.main.utils.push;
 
 import com.alibaba.fastjson.JSONObject;
+import com.sdh.qqbot.main.config.ApiKeyConfig;
+import com.sdh.qqbot.main.config.ApiUrlConfig;
+import com.sdh.qqbot.main.utils.okhttp.OkHttpUtil;
 import lombok.extern.slf4j.Slf4j;
-import sdh.qqbot.config.ApiKeyConfig;
-import sdh.qqbot.config.ApiUrlConfig;
-import sdh.qqbot.utils.okhttp.OkHttpUtil;
 
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;

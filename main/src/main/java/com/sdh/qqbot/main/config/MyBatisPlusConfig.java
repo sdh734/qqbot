@@ -1,4 +1,4 @@
-package sdh.qqbot.config;
+package com.sdh.qqbot.main.config;
 
 import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@MapperScan("sdh.qqbot.mapper")
+@MapperScan("com.sdh.qqbot.main.mapper")
 public class MyBatisPlusConfig {
 
     /**

@@ -1,4 +1,4 @@
-package sdh.qqbot.entity.message;
+package com.sdh.qqbot.main.entity.message;
 
 import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.annotation.JsonProperty;

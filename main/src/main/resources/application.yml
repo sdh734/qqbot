@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 8090
 
 spring:
   datasource:
@@ -23,11 +23,9 @@ mybatis-plus:
 
 plugin:
   runMode: dev
-  mainPackage: com.sdh.qqbot.main
+  mainPackage: com.sdh.qqbot
   # 如果配置是 windows 下路径, mac、linux 自行修改
   pluginPath:
-    - ~\qqbot-plugins-basic
+    - ~\
     #- ~\example-plugins-db
     #- ~\example-plugins-cloud
-  sortInitPluginIds:
-    - qqbot-basic-1

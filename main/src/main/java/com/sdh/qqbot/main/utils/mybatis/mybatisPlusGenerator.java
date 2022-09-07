@@ -1,4 +1,4 @@
-package sdh.qqbot.utils.mybatis;
+package com.sdh.qqbot.main.utils.mybatis;
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.core.exceptions.MybatisPlusException;
@@ -30,7 +30,7 @@ public class mybatisPlusGenerator {
     /**
      * 包名
      */
-    public static final String PARENT_PACKAGE = "sdh.qqbot";
+    public static final String PARENT_PACKAGE = "com.sdh.qqbot.main";
 
     /**
      * 项目路径
@@ -39,12 +39,12 @@ public class mybatisPlusGenerator {
     /**
      * controller service entity mapper输出目录
      */
-    public static final String OUTPUT_DIR = PROJECT_PATH + "/src/main/java/";
+    public static final String OUTPUT_DIR = PROJECT_PATH + "/main/src/main/java/";
 
     /**
      * mapperXml输出目录
      */
-    public static final String MAPPER_XML_DIR = PROJECT_PATH + "/src/main/resources/mapper/";
+    public static final String MAPPER_XML_DIR = PROJECT_PATH + "/main/src/main/resources/mapper/";
 
     public static void main(String[] args) {
         //String moduleName = scanner("请输入模块名？");
@@ -59,12 +59,12 @@ public class mybatisPlusGenerator {
                 // 全局配置
                 .globalConfig(builder -> builder.author("SDH").fileOverride().outputDir(OUTPUT_DIR))
                 // 包配置
-                .packageConfig(builder -> builder.parent(PARENT_PACKAGE).mapper("mapper").entity("entity.database").controller("controller").pathInfo(Collections.singletonMap(OutputFile.xml, MAPPER_XML_DIR)))
+                .packageConfig(builder -> builder.parent(PARENT_PACKAGE).mapper("mapper").entity("entity.database").controller("controller.database").pathInfo(Collections.singletonMap(OutputFile.xml, MAPPER_XML_DIR)))
                 // 策略配置
                 .strategyConfig(builder -> builder.addInclude(getTables(tableNames)).addTablePrefix("t_")
                         .controllerBuilder().enableRestStyle().enableHyphenStyle()
                         .entityBuilder().enableLombok().addTableFills(createTime, updateTime)
-                        .mapperBuilder().enableMapperAnnotation().enableBaseResultMap().enableBaseColumnList()
+                        .mapperBuilder().enableMapperAnnotation().enableBaseResultMap().enableBaseColumnList().enableFileOverride()
                         .build())
                 /*  模板引擎配置，默认 Velocity 可选模板引擎 Beetl 或 Freemarker
                 .templateEngine(new BeetlTemplateEngine())

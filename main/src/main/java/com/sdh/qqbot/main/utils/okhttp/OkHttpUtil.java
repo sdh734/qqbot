@@ -1,4 +1,4 @@
-package sdh.qqbot.utils.okhttp;
+package com.sdh.qqbot.main.utils.okhttp;
 
 import okhttp3.*;
 

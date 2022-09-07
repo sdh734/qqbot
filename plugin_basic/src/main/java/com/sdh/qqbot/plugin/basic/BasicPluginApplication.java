@@ -1,4 +1,4 @@
-package com.sdh.qqbot.plugins.basic;
+package com.sdh.qqbot.plugin.basic;
 
 import com.gitee.starblues.bootstrap.SpringPluginBootstrap;
 import lombok.extern.slf4j.Slf4j;
