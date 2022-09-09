@@ -2,7 +2,9 @@ package com.sdh.qqbot.main.websocker;
 
 import cn.hutool.core.thread.ThreadUtil;
 import com.alibaba.fastjson.JSON;
+import com.sdh.qqbot.main.entity.message.EchoMessageEntity;
 import com.sdh.qqbot.main.entity.message.MessageEntity;
+import com.sdh.qqbot.main.message.RecallMessageManager;
 import com.sdh.qqbot.main.message.ReceiverMessageManager;
 import com.sdh.qqbot.main.utils.push.PushUtils;
 import io.javalin.Javalin;
@@ -31,6 +33,7 @@ public class WebSocketInstance {
                 errorCount = 0;
                 WebSocketTool.setCtx(ctx);
                 ReceiverMessageManager.load();
+                RecallMessageManager.load();
             });
             ws.onClose(ctx -> {
                 log.info("WS连接关闭");
@@ -39,17 +42,22 @@ public class WebSocketInstance {
                 WebSocketTool.setCtx(null);
             });
             ws.onMessage(ctx -> {
+                //获取消息类型
                 String postType = JSON.parseObject(ctx.message()).getString("post_type");
                 if (("message").equals(postType)) {
-//                    log.info(ctx.messageAsClass(MessageEntity.class).toString());
                     ReceiverMessageManager.manager(ctx.messageAsClass(MessageEntity.class));
                 } else {
-                    log.info(ctx.message());
+                    String echo = JSON.parseObject(ctx.message()).getString("echo");
+                    if (echo != null) {
+                        RecallMessageManager.manager(ctx.messageAsClass(EchoMessageEntity.class));
+                    }
                 }
+
             });
             ws.onBinaryMessage(ctx -> log.info(Arrays.toString(ctx.data())));
             ws.onError(ctx -> {
                 log.info("WS连接出错");
+                log.info(ctx.error().toString());
                 ThreadUtil.sleep(5000);
                 errorCount++;
                 ctx.closeSession();

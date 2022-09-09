@@ -12,6 +12,7 @@
         <module>main</module>
         <module>plugin_basic</module>
         <module>plugin_word</module>
+        <module>plugin_recall</module>
     </modules>
 
     <properties>

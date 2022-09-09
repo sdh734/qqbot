@@ -23,6 +23,9 @@ public class ReceiverMessageManager {
 
     private static List<ReceiverMessage> receiverMessages;
 
+    /**
+     * 加载所有实现ReceiverMessage接口的类
+     */
     public static void load() {
         receiverMessages = extractFactory.getExtractByInterClass(ReceiverMessage.class);
     }

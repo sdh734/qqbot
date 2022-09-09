@@ -1,4 +1,4 @@
-package com.sdh.qqbot.plugin.basic.tool;
+package com.sdh.qqbot.plugin.basic.utils;
 
 import com.gitee.starblues.annotation.Extract;
 import com.sdh.qqbot.main.entity.message.MessageEntity;
@@ -21,11 +21,13 @@ public class BasicTool implements ReceiverMessage {
      * @param message 消息实体
      */
     public void MessageManager(MessageEntity message) {
-        if (message.getMessage().equals("recall")) {
+        //message 色图 xx xx
+        String key = message.getMessage().split(" ")[0];
+        if (("recall").equals(message.getMessage())) {
             SendMessageEntity msg = new SendMessageEntity();
             msg.setAction("send_msg");
             Map<String, String> params = new HashMap<>();
-            params.put("user_id", "1247769958");
+            params.put("user_id", message.getSender().getUserId());
             params.put("message", message.getMessage());
             msg.setParams(params);
             msg.setEcho("recall");

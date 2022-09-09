@@ -17,7 +17,12 @@ public class WebSocketTool {
     private static void init() {
         WebSocketInstance.init("/ws/api", 8091);
     }
+    private static void sendPrivateMessage(){
 
+    }
+    private static void sendGroupMessage(){
+
+    }
     /**
      * 发送消息
      *
