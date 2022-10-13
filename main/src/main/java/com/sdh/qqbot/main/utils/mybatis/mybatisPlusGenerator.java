@@ -59,11 +59,16 @@ public class mybatisPlusGenerator {
                 // 全局配置
                 .globalConfig(builder -> builder.author("SDH").fileOverride().outputDir(OUTPUT_DIR))
                 // 包配置
-                .packageConfig(builder -> builder.parent(PARENT_PACKAGE).mapper("mapper").entity("entity.database").controller("controller.database").pathInfo(Collections.singletonMap(OutputFile.xml, MAPPER_XML_DIR)))
+                .packageConfig(builder -> builder
+                        .parent(PARENT_PACKAGE)
+                        .mapper("mapper")
+                        .entity("entity.database")
+                        .controller("controller.database")
+                        .pathInfo(Collections.singletonMap(OutputFile.xml, MAPPER_XML_DIR)))
                 // 策略配置
                 .strategyConfig(builder -> builder.addInclude(getTables(tableNames)).addTablePrefix("t_")
                         .controllerBuilder().enableRestStyle().enableHyphenStyle()
-                        .entityBuilder().enableLombok().addTableFills(createTime, updateTime)
+                        .entityBuilder().enableLombok().enableTableFieldAnnotation().addTableFills(createTime, updateTime)
                         .mapperBuilder().enableMapperAnnotation().enableBaseResultMap().enableBaseColumnList().enableFileOverride()
                         .build())
                 /*  模板引擎配置，默认 Velocity 可选模板引擎 Beetl 或 Freemarker
@@ -73,12 +78,23 @@ public class mybatisPlusGenerator {
                 .execute();
     }
 
-    // 处理 all 情况
+    /**
+     * 处理All的情况
+     *
+     * @param tables 表
+     * @return {@code List<String>}
+     **/
     protected static List<String> getTables(String tables) {
         return "all".equals(tables) ? Collections.emptyList() : Arrays.asList(tables.split(","));
     }
 
-    // 交互输入
+
+    /**
+     * 交互输入
+     *
+     * @param tip 提示
+     * @return {@code String}
+     */
     public static String scanner(String tip) {
         Scanner scanner = new Scanner(System.in);
         System.out.println(tip);

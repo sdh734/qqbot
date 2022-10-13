@@ -22,10 +22,10 @@ mybatis-plus:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
 plugin:
-  runMode: dev
+  runMode: prod
   mainPackage: com.sdh.qqbot
   # 如果配置是 windows 下路径, mac、linux 自行修改
   pluginPath:
-    - ~\
+    - ~\plugins
     #- ~\example-plugins-db
     #- ~\example-plugins-cloud
