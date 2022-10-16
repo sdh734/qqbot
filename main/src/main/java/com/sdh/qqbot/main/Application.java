@@ -7,6 +7,9 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+/**
+ * @author SDH
+ */
 @SpringBootApplication
 @MapperScan("com.sdh.qqbot.main.mapper")
 public class Application implements SpringBootstrap {

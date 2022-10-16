@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,14 +13,15 @@ import java.time.LocalDateTime;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author SDH
- * @since 2022-10-11
+ * @since 2022-10-16
  */
 @Getter
 @Setter
+@Builder
 @TableName("t_message")
 public class Message implements Serializable {
 
@@ -41,7 +43,7 @@ public class Message implements Serializable {
      * 消息ID
      */
     @TableField("message_id")
-    private Long messageId;
+    private String messageId;
 
     /**
      * 发送时间戳
@@ -71,13 +73,13 @@ public class Message implements Serializable {
      * 发送人QQ号
      */
     @TableField("sender_userid")
-    private Integer senderUserid;
+    private String senderUserid;
 
     /**
      * 是否群消息
      */
-    @TableField("group")
-    private Boolean group;
+    @TableField("isgroup")
+    private Boolean isgroup;
 
     /**
      * 群ID

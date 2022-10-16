@@ -12,13 +12,13 @@
         <result column="message" property="message" />
         <result column="sender_nickname" property="senderNickname" />
         <result column="sender_userid" property="senderUserid" />
-        <result column="group" property="group" />
+        <result column="isgroup" property="isgroup" />
         <result column="group_id" property="groupId" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, message_type, message_id, time, real_id, message, sender_nickname, sender_userid, group, group_id
+        id, message_type, message_id, time, real_id, message, sender_nickname, sender_userid, isgroup, group_id
     </sql>
 
 </mapper>

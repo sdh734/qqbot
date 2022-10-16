@@ -1,6 +1,6 @@
 package com.sdh.qqbot.main.utils.push;
 
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson2.JSONObject;
 import com.sdh.qqbot.main.config.ApiKeyConfig;
 import com.sdh.qqbot.main.config.ApiUrlConfig;
 import com.sdh.qqbot.main.utils.okhttp.OkHttpUtil;
@@ -11,7 +11,11 @@ import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 
 /**
+ * 推送实用程序
  * 消息推送工具
+ *
+ * @author SDH
+ * @date 2022/10/16
  */
 @Slf4j
 public class PushUtils {

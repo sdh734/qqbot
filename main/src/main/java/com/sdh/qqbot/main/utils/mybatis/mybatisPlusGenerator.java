@@ -23,7 +23,7 @@ public class mybatisPlusGenerator {
     /**
      * 数据库
      */
-    public static final String JDBC_URL = "jdbc:mysql://127.0.0.1:3306/qqbot?serverTimezone=GMT%2B8";
+    public static final String JDBC_URL      = "jdbc:mysql://127.0.0.1:3306/qqbot?serverTimezone=GMT%2B8";
     public static final String JDBC_USERNAME = "root";
     public static final String JDBC_PASSWORD = "123456";
 
@@ -39,7 +39,7 @@ public class mybatisPlusGenerator {
     /**
      * controller service entity mapper输出目录
      */
-    public static final String OUTPUT_DIR = PROJECT_PATH + "/main/src/main/java/";
+    public static final String OUTPUT_DIR   = PROJECT_PATH + "/main/src/main/java/";
 
     /**
      * mapperXml输出目录
@@ -51,31 +51,32 @@ public class mybatisPlusGenerator {
         String tableNames = scanner("请输入表名，多个英文逗号分隔？所有输入 all");
 
         // 数据库
-        DataSourceConfig.Builder datasourceBuilder = new DataSourceConfig.Builder(JDBC_URL, JDBC_USERNAME, JDBC_PASSWORD);
+        DataSourceConfig.Builder datasourceBuilder = new DataSourceConfig.Builder(JDBC_URL, JDBC_USERNAME,
+                                                                                  JDBC_PASSWORD);
         // 特殊字段（两种方式）
-        Column createTime = new Column("create_time", FieldFill.INSERT);
+        Column   createTime = new Column("create_time", FieldFill.INSERT);
         Property updateTime = new Property("updateTime", FieldFill.INSERT_UPDATE);
         FastAutoGenerator.create(datasourceBuilder)
-                // 全局配置
-                .globalConfig(builder -> builder.author("SDH").fileOverride().outputDir(OUTPUT_DIR))
-                // 包配置
-                .packageConfig(builder -> builder
-                        .parent(PARENT_PACKAGE)
-                        .mapper("mapper")
-                        .entity("entity.database")
-                        .controller("controller.database")
-                        .pathInfo(Collections.singletonMap(OutputFile.xml, MAPPER_XML_DIR)))
-                // 策略配置
-                .strategyConfig(builder -> builder.addInclude(getTables(tableNames)).addTablePrefix("t_")
-                        .controllerBuilder().enableRestStyle().enableHyphenStyle()
-                        .entityBuilder().enableLombok().enableTableFieldAnnotation().addTableFills(createTime, updateTime)
-                        .mapperBuilder().enableMapperAnnotation().enableBaseResultMap().enableBaseColumnList().enableFileOverride()
-                        .build())
-                /*  模板引擎配置，默认 Velocity 可选模板引擎 Beetl 或 Freemarker
-                .templateEngine(new BeetlTemplateEngine())
-                .templateEngine(new FreemarkerTemplateEngine())
-                */
-                .execute();
+                         // 全局配置
+                         .globalConfig(builder -> builder.author("SDH").outputDir(OUTPUT_DIR))
+                         // 包配置
+                         .packageConfig(
+                                 builder -> builder.parent(PARENT_PACKAGE).mapper("mapper").entity("entity.database")
+                                                   .controller("controller.database")
+                                                   .pathInfo(Collections.singletonMap(OutputFile.xml, MAPPER_XML_DIR)))
+                         // 策略配置
+                         .strategyConfig(builder -> builder.addInclude(getTables(tableNames)).addTablePrefix("t_")
+                                                           .controllerBuilder().enableFileOverride().enableRestStyle()
+                                                           .enableHyphenStyle().entityBuilder().enableFileOverride()
+                                                           .enableLombok().enableTableFieldAnnotation()
+                                                           .addTableFills(createTime, updateTime).mapperBuilder()
+                                                           .enableBaseResultMap().enableBaseColumnList()
+                                                           .enableFileOverride().serviceBuilder().enableFileOverride()
+                                                           .build())
+                         /*  模板引擎配置，默认 Velocity 可选模板引擎 Beetl 或 Freemarker
+                         .templateEngine(new BeetlTemplateEngine())
+                         .templateEngine(new FreemarkerTemplateEngine())
+                         */.execute();
     }
 
     /**

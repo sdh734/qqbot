@@ -11,11 +11,12 @@ import lombok.Setter;
 import java.io.Serializable;
 
 /**
- * 用户
+ * <p>
+ *
+ * </p>
  *
  * @author SDH
- * @date 2022/10/13
- * @since 2022-10-11
+ * @since 2022-10-16
  */
 @Getter
 @Setter
@@ -44,7 +45,7 @@ public class User implements Serializable {
     private String nickname;
 
     /**
-     * 用户权限等级（机器人内部使用）
+     * 用户权限等级
      */
     @TableField("user_level")
     private Integer userLevel;

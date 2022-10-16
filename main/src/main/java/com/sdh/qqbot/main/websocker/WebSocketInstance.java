@@ -1,7 +1,7 @@
 package com.sdh.qqbot.main.websocker;
 
 import cn.hutool.core.thread.ThreadUtil;
-import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson2.JSON;
 import com.sdh.qqbot.main.entity.message.EchoMessageEntity;
 import com.sdh.qqbot.main.entity.message.MessageEntity;
 import com.sdh.qqbot.main.message.RecallMessageManager;
@@ -11,14 +11,19 @@ import io.javalin.Javalin;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Arrays;
+import java.util.Objects;
 
+/**
+ * @author SDH
+ */
 @Slf4j
 public class WebSocketInstance {
-    private static Javalin instance = null;
+    private static Javalin instance      = null;
     /**
      * 出错次数
      */
-    private static int errorCount = 0;
+    private static int     errorCount    = 0;
+    private static int     errorCountMax = 5;
 
     /**
      * 初始化WS服务器
@@ -26,7 +31,7 @@ public class WebSocketInstance {
      * todo WebSocketConfig后期改为配置文件读取
      */
     public static void init(String path, int port) {
-        instance = Javalin.create().ws(path, ws -> {
+        Javalin.create().get("/", ctx -> ctx.result("OK")).ws(path, ws -> {
             //连接成功
             ws.onConnect(ctx -> {
                 log.info("WS连接成功");
@@ -44,7 +49,7 @@ public class WebSocketInstance {
             ws.onMessage(ctx -> {
                 //获取消息类型
                 String postType = JSON.parseObject(ctx.message()).getString("post_type");
-                if (("message").equals(postType)) {
+                if ("message".equals(postType)) {
                     ReceiverMessageManager.manager(ctx.messageAsClass(MessageEntity.class));
                 } else {
                     String echo = JSON.parseObject(ctx.message()).getString("echo");
@@ -57,12 +62,12 @@ public class WebSocketInstance {
             ws.onBinaryMessage(ctx -> log.info(Arrays.toString(ctx.data())));
             ws.onError(ctx -> {
                 log.info("WS连接出错");
-                log.info(ctx.error().toString());
+                log.info(Objects.requireNonNull(ctx.error()).toString());
                 ThreadUtil.sleep(5000);
                 errorCount++;
                 ctx.closeSession();
                 WebSocketTool.setCtx(null);
-                if (errorCount < 5) {
+                if (errorCount < errorCountMax) {
                     init("/ws/api", 8091);
                 } else {
                     PushUtils.push("WS连接超时，请检查服务器网络连接!");
